@@ -107,7 +107,11 @@ export default function Header({ children, cartVersion }) {
                 <div className={styles.cartList}>
                   {cart.map((it) => (
                     <div key={it.id} className={styles.cartItem}>
-                      <img className={styles.cartImg} src={it.image} alt={it.name} />
+                      <img
+                        className={styles.cartImg}
+                        src={it.image}
+                        alt={it.name}
+                      />
 
                       <div className={styles.cartInfo}>
                         <div className={styles.cartName}>{it.name}</div>
@@ -119,7 +123,9 @@ export default function Header({ children, cartVersion }) {
                       </div>
 
                       <div className={styles.cartLineTotal}>
-                        {formatVnd((Number(it.price) || 0) * (Number(it.qty) || 0))}
+                        {formatVnd(
+                          (Number(it.price) || 0) * (Number(it.qty) || 0)
+                        )}
                       </div>
                     </div>
                   ))}
@@ -134,7 +140,10 @@ export default function Header({ children, cartVersion }) {
                   <button
                     type="button"
                     className={styles.cartViewBtn}
-                    onClick={() => setOpenCart(false)}
+                    onClick={() => {
+                      setOpenCart(false);
+                      navigate("/cart");
+                    }}
                   >
                     Xem giỏ hàng
                   </button>

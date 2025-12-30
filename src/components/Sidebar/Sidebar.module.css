@@ -4,6 +4,8 @@
   background: #1a1a1a;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   overflow-y: auto;
+
+
 }
 
 .filterTitle {
@@ -40,13 +42,13 @@
   font-size: 16px;
 }
 
-.right{
-    transform: rotate(0);
-    transition: 0.3s;
+.right {
+  transform: rotate(0);
+  transition: 0.3s;
 }
 
-.down{
-  transform: rotate(90deg); 
+.down {
+  transform: rotate(90deg);
   transition: 0.3s;
 }
 
@@ -63,8 +65,8 @@
   transition: 0.5s;
 }
 
-.active{
-  max-height: 500px; 
+.active {
+  max-height: 500px;
   opacity: 1;
   transform: translateY(0);
 }

@@ -6,7 +6,9 @@ export default function Layout({ cartVersion, headerCenter }) {
   return (
     <>
       <Header cartVersion={cartVersion}>{headerCenter}</Header>
-      <Outlet />
+      <main style={{ marginTop: 70 }}>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

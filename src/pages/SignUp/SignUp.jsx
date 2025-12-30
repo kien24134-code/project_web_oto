@@ -82,7 +82,7 @@ export default function SignUp() {
 
   return (
     <>
- 
+      <Header/>
       <div className={styles.page}>
         <div className={styles.card}>
           <h1 className={styles.title}>

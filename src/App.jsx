@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import Cart from "./pages/Cart/Cart";
 import Layout from "./layout/Layout";
 import Home from "./pages/Home/Home";
 import AboutUs from "./pages/AboutUs/AboutUs";
@@ -30,7 +31,9 @@ function App() {
         element={
           <Layout
             cartVersion={cartVersion}
-            headerCenter={<Search cars={cars} query={query} setQuery={setQuery} />}
+            headerCenter={
+              <Search cars={cars} query={query} setQuery={setQuery} />
+            }
           />
         }
       >
@@ -40,6 +43,7 @@ function App() {
       <Route element={<Layout cartVersion={cartVersion} headerCenter={null} />}>
         <Route path="/aboutUs" element={<AboutUs />} />
         <Route path="/car/:id" element={<DetailCar bumpCart={bumpCart} />} />
+        <Route path="/cart" element={<Cart bumpCart={bumpCart} />} />
       </Route>
 
       <Route path="/login" element={<Login bumpCart={bumpCart} />} />
