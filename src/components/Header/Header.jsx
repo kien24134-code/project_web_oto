@@ -14,25 +14,17 @@ function readAuth() {
   }
 }
 
-const formatVnd = (n) => `${new Intl.NumberFormat("vi-VN").format(Number(n) || 0)} đ`;
+const formatVnd = (n) =>
+  `${new Intl.NumberFormat("vi-VN").format(Number(n) || 0)} đ`;
 
-export default function Header({ children }) {
+export default function Header({ children, cartVersion }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(() => readAuth());
   const [openCart, setOpenCart] = useState(false);
 
-  // ✅ tự cập nhật user (và cart) khi localStorage đổi
   useEffect(() => {
-    const sync = () => setUser(readAuth());
-
-    window.addEventListener("cart_updated", sync);
-    window.addEventListener("storage", sync);
-
-    return () => {
-      window.removeEventListener("cart_updated", sync);
-      window.removeEventListener("storage", sync);
-    };
-  }, []);
+    setUser(readAuth());
+  }, [cartVersion]);
 
   const cart = user?.cart || [];
 
@@ -42,7 +34,11 @@ export default function Header({ children }) {
   );
 
   const cartTotal = useMemo(
-    () => cart.reduce((sum, it) => sum + (Number(it.price) || 0) * (Number(it.qty) || 0), 0),
+    () =>
+      cart.reduce(
+        (sum, it) => sum + (Number(it.price) || 0) * (Number(it.qty) || 0),
+        0
+      ),
     [cart]
   );
 
@@ -53,7 +49,6 @@ export default function Header({ children }) {
       if (!ok) return;
 
       localStorage.removeItem(AUTH_KEY);
-      window.dispatchEvent(new Event("cart_updated")); // ✅ sync header
       setUser(null);
       setOpenCart(false);
       navigate("/login");
@@ -73,11 +68,11 @@ export default function Header({ children }) {
       <nav className={styles.right}>
         {user ? (
           <h3 className={styles.authDesc}>
-            Xin chào: <strong className={styles.authDescName}>{user.userName}</strong>
+            Xin chào:{" "}
+            <strong className={styles.authDescName}>{user.userName}</strong>
           </h3>
         ) : null}
 
-        {/* ✅ CART ICON */}
         <button
           type="button"
           className={styles.cartBtn}
@@ -87,7 +82,6 @@ export default function Header({ children }) {
           {cartQty > 0 && <span className={styles.cartBadge}>{cartQty}</span>}
         </button>
 
-        {/* ✅ CART POPUP */}
         {openCart && (
           <div className={styles.cartPopup}>
             <div className={styles.cartTitle}>Giỏ hàng</div>
@@ -140,10 +134,7 @@ export default function Header({ children }) {
                   <button
                     type="button"
                     className={styles.cartViewBtn}
-                    onClick={() => {
-                      setOpenCart(false);
-                      navigate("/cart"); // nếu bạn có trang /cart
-                    }}
+                    onClick={() => setOpenCart(false)}
                   >
                     Xem giỏ hàng
                   </button>

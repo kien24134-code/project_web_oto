@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 import styles from "./DetailCar.module.css";
 import useFormatVnd from "../../hooks/useFormatVnd";
 import AddToCart from "../../components/AddToCard/AddToCart";
@@ -22,7 +20,7 @@ function writeJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-export default function DetailCar() {
+export default function DetailCar({ bumpCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,6 +32,7 @@ export default function DetailCar() {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
+    if (carFromState) return;
 
     fetch("/data/cars.json")
       .then((r) => r.json())
@@ -41,19 +40,21 @@ export default function DetailCar() {
         const found = data.find((x) => String(x.id) === String(id));
         setCarFromApi(found || null);
       })
-      .catch(() => {
-        setCarFromApi(null);
-      });
+      .catch(() => setCarFromApi(null));
   }, [id, carFromState]);
 
   const car = useMemo(() => carFromState || carFromApi, [carFromState, carFromApi]);
 
-  const bannerSrc = car.BannerURL || car.banner || car.URL;
+  if (!car) {
+    return <div style={{ padding: 24, color: "#fff" }}>Loading...</div>;
+  }
+
+  const bannerSrc = car?.BannerURL || car?.banner || car?.URL;
 
   const handleAddToCart = () => {
     const auth = readJSON(AUTH_KEY, null);
     if (!auth) {
-      alert("Vui long dang nhap")
+      alert("Vui lòng đăng nhập");
       navigate("/login");
       return;
     }
@@ -81,64 +82,58 @@ export default function DetailCar() {
 
     const updatedUser = { ...currentUser, cart };
     users[userIndex] = updatedUser;
-    writeJSON(USERS_KEY, users);
 
+    writeJSON(USERS_KEY, users);
     writeJSON(AUTH_KEY, updatedUser);
 
+    bumpCart(); 
     alert(`Đã thêm ${item.qty} vào giỏ hàng`);
   };
 
   return (
-    <>
-      <Header />
+    <div className={styles.page}>
+      <section className={styles.banner}>
+        <img className={styles.bannerImg} src={bannerSrc} alt={car.name} />
+      </section>
 
-      <div className={styles.page}>
-        <section className={styles.banner}>
-          <img className={styles.bannerImg} src={bannerSrc} alt={car.name} />
-        </section>
+      <div className={styles.wrap}>
+        <div className={styles.detailCard}>
+          <div className={styles.left}>
+            <div className={styles.badge}>{car.Fuel}</div>
+            <img className={styles.image} src={car.URL} alt={car.name} />
+          </div>
 
-        <div className={styles.wrap}>
-          <div className={styles.detailCard}>
-            <div className={styles.left}>
-              <div className={styles.badge}>{car.Fuel}</div>
-              <img className={styles.image} src={car.URL} alt={car.name} />
+          <div className={styles.right}>
+            <h1 className={styles.name}>{car.name}</h1>
+            <div className={styles.price}>{formatVnd(car.Price)}</div>
+
+            <div className={styles.infoGrid}>
+              <div className={styles.infoItem}>
+                <span className={styles.label}>Type</span>
+                <span className={styles.value}>{car.Type}</span>
+              </div>
+
+              <div className={styles.infoItem}>
+                <span className={styles.label}>Seats</span>
+                <span className={styles.value}>{car.seats}</span>
+              </div>
+
+              <div className={styles.infoItem}>
+                <span className={styles.label}>Transmission</span>
+                <span className={styles.value}>{car.transmission}</span>
+              </div>
             </div>
 
-            <div className={styles.right}>
-              <h1 className={styles.name}>{car.name}</h1>
-              <div className={styles.price}>{formatVnd(car.Price)}</div>
+            <AddToCart qty={qty} setQty={setQty} onAddToCart={handleAddToCart} />
 
-              <div className={styles.infoGrid}>
-                <div className={styles.infoItem}>
-                  <span className={styles.label}>Type</span>
-                  <span className={styles.value}>{car.Type}</span>
-                </div>
-
-                <div className={styles.infoItem}>
-                  <span className={styles.label}>Seats</span>
-                  <span className={styles.value}>{car.seats}</span>
-                </div>
-
-                <div className={styles.infoItem}>
-                  <span className={styles.label}>Transmission</span>
-                  <span className={styles.value}>{car.transmission}</span>
-                </div>
-              </div>
-
-              <AddToCart qty={qty} setQty={setQty} onAddToCart={handleAddToCart} />
-
-
-              <div className={styles.actions}>
-                <button className={styles.btn} type="button" onClick={() => navigate("/")}>
-                  Back to Home
-                </button>
-              </div>
+            <div className={styles.actions}>
+              <button className={styles.btn} type="button" onClick={() => navigate("/")}>
+                Back to Home
+              </button>
             </div>
           </div>
         </div>
       </div>
-
-      <Footer />
-    </>
+    </div>
   );
 }

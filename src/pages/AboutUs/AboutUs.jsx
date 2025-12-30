@@ -4,8 +4,7 @@ import styles from "./AboutUs.module.css";
 export default function AboutUs() {
   return (
     <>
-      <Header />
-      <div className={styles.page}>
+       <div className={styles.page}>
         <div className={styles.contentBackground}>
           <div className={styles.content}>
             <h1>About US</h1>

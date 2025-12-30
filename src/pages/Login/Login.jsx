@@ -63,8 +63,9 @@ export default function Login() {
 
   return (
     <>
-      <Header />
-      <div className={styles.page}>
+    <Header/>
+
+       <div className={styles.page}>
         <div className={styles.card}>
           <h1 className={styles.title}>
             Hello ! <br />
