@@ -1,0 +1,37 @@
+.footer {
+  padding: 18px 0;
+  background: #1a1a1a;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: center;
+}
+
+.socialsList {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.socialsList a {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.socialsList a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.socialsList i {
+  font-size: 20px;
+}

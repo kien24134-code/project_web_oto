@@ -1,0 +1,122 @@
+.sidebar {
+  width: 280px;
+  padding: 18px 14px;
+  background: #1a1a1a;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  overflow-y: auto;
+}
+
+.filterTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.filterTitle i {
+  opacity: 0.9;
+}
+
+.filterGroup {
+  margin-bottom: 18px;
+}
+
+.groupTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 20px 0 20px;
+  cursor: pointer;
+}
+
+.groupTitle i {
+  opacity: 0.8;
+  font-size: 16px;
+}
+
+.right{
+    transform: rotate(0);
+    transition: 0.3s;
+}
+
+.down{
+  transform: rotate(90deg); 
+  transition: 0.3s;
+}
+
+.options {
+  overflow: hidden;
+
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: 0.5s;
+}
+
+.active{
+  max-height: 500px; 
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.option {
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease, transform 0.05s ease;
+}
+
+.option:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.option:active {
+  transform: scale(0.99);
+}
+
+.option i {
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 99px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 240px;
+  }
+}

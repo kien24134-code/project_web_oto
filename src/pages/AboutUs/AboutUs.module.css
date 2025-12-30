@@ -1,0 +1,109 @@
+.page {
+  min-height: 100vh;
+  position: relative;
+
+  /* nền ảnh + blur */
+  background-image: url("/image/back.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* lớp blur phủ lên */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.contentBackground {
+  position: relative; 
+  z-index: 1;
+
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.content {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.content h1 {
+  margin: 0 0 12px;
+  font-size: 44px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.content h2 {
+  margin: 26px 0 12px;
+  font-size: 34px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.content h3 {
+  margin: 26px 0 10px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.faq h4 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.faq ul {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.faq li {
+  margin: 10px 0;
+}
+
+.faq a {
+  color: #ff5a3d;
+  text-decoration: none;
+}
+
+.faq a:hover {
+  text-decoration: underline;
+}
+
+.contact, .recruit {
+  margin-top: 22px;
+}
+
+.applyBtn {
+  margin-top: 30px;
+
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 0, 0, 0.55);
+  background: rgba(255, 0, 0, 0.18);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.applyBtn:hover {
+  background: rgba(255, 0, 0, 0.28);
+}
+
+@media (max-width: 600px) {
+  .contentBackground { padding: 40px 16px; }
+  .content h1 { font-size: 34px; }
+  .content h2 { font-size: 26px; }
+}

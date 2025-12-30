@@ -1,0 +1,174 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+
+  background-image: url("/image/back.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* lớp blur + tối nền */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+
+  width: min(520px, 92vw);
+  padding: 38px 42px;
+
+  border-radius: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.15);
+
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.55);
+}
+
+.title {
+  margin: 0 0 22px;
+  text-align: center;
+  color: #fff;
+  font-weight: 900;
+  font-size: 46px;
+  line-height: 1.05;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.35);
+}
+
+.title span {
+  font-weight: 900;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.errorDesc{
+    display: flex;
+    justify-content: center;
+    color: rgb(253, 71, 71);
+}
+
+.input {
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.92);
+  padding: 0 18px;
+  outline: none;
+  font-size: 14px;
+}
+
+.input.error {
+  box-shadow: 4px 4px 20px red;
+  
+}
+
+.input::placeholder {
+  color: rgba(0,0,0,0.55);
+}
+
+.passwordWrap {
+  display: grid;
+  gap: 8px;
+}
+
+.forgot {
+  justify-self: end;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.btnPrimary,
+.btnSecondary {
+  height: 46px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.btnPrimary {
+  background: rgba(255,255,255,0.92);
+  color: #111;
+}
+
+.btnPrimary:hover {
+  filter: brightness(0.95);
+}
+
+.btnSecondary {
+  background: rgba(120,120,120,0.7);
+  color: #fff;
+}
+
+.btnSecondary:hover {
+  filter: brightness(1.05);
+}
+
+.divider {
+  margin: 16px 0 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.dividerText {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.googleBtn {
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border-radius: 999px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.25);
+  color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.googleBtn:hover {
+  background: rgba(0,0,0,0.35);
+}
+
+.googleIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+
+  background: #fff;
+  color: #000;
+  font-weight: 900;
+}
+
+@media (max-width: 520px) {
+  .card {
+    padding: 28px 20px;
+  }
+  .title {
+    font-size: 36px;
+  }
+}
