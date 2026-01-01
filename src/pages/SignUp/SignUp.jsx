@@ -75,7 +75,10 @@ export default function SignUp() {
       localStorage.setItem("users", JSON.stringify(users));
 
       alert("Đăng ký thành công!");
-
+      dispatch(setEmail(""))
+      dispatch(setUsername(""))
+      dispatch(setPassword(""))
+      dispatch(setConfirmPassword(""))
       dispatch(signup());
     }
   };

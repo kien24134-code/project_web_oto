@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import useFormatVnd from "../../hooks/useFormatVnd";
 import styles from "./Cart.module.css";
 
 const AUTH_KEY = "auth";
@@ -18,12 +19,11 @@ function writeJSON(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-const formatVnd = (n) =>
-  `${new Intl.NumberFormat("vi-VN").format(Number(n) || 0)} đ`;
+
 
 export default function Cart({ bumpCart }) {
   const navigate = useNavigate();
-
+  const formatVnd = useFormatVnd()
   const auth = readJSON(AUTH_KEY, null);
 
   // chưa login
