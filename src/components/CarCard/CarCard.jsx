@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useFormatVnd from "../../hooks/useFormatVnd";
 
 export default function CarCard({ car }) {
-  const {formatVnd} = useFormatVnd()
+  const formatVnd = useFormatVnd()
 
   return (
     <Link

@@ -24,7 +24,7 @@ export default function DetailCar({ bumpCart }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { formatVnd } = useFormatVnd();
+  const  formatVnd  = useFormatVnd();
 
   const carFromState = location.state ? location.state.car : null;
 
